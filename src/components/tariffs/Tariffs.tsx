@@ -26,14 +26,15 @@ import {
 
 import { pageConfig } from '@/config/page.config'
 
-import { FormDialog } from '../ui/dialog/CreateDialog'
-
+import { useDeleteTariff } from './hooks/useDeleteTariff'
 import { useTariffs } from './hooks/useTariffs'
+import { TariffModal } from './TariffModal'
 
 export function TariffsContent() {
 	const { companyId } = useParams()
 	const { items } = useTariffs(Number(companyId))
 
+	const { deleteTariff } = useDeleteTariff()
 	return (
 		<>
 			<Breadcrumb>
@@ -49,27 +50,23 @@ export function TariffsContent() {
 			</Breadcrumb>
 
 			<div className='flex justify-end'>
-				<FormDialog title='Create Tariff'>
-					<Button size='lg' className='text-md'>
-						Create
-					</Button>
-				</FormDialog>
+				<TariffModal companyId={Number(companyId)} title='Create Tariff' />
 			</div>
 
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead className='w-[100px]'>ID</TableHead>
+						<TableHead className='w-[100px]'>№</TableHead>
 						<TableHead>Name</TableHead>
 						<TableHead>Price</TableHead>
-						<TableHead>Amount</TableHead>
+						<TableHead>Subscribers</TableHead>
 						<TableHead className='text-right'>Actions</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{items?.map(item => (
+					{items?.map((item, index) => (
 						<TableRow key={item.id}>
-							<TableCell className='font-medium'>{item.id}</TableCell>
+							<TableCell className='font-medium'>{index + 1}</TableCell>
 							<TableCell>{item.name}</TableCell>
 							<TableCell>{item.price}</TableCell>
 							<TableCell>{item.subscribers?.length}</TableCell>
@@ -96,7 +93,10 @@ export function TariffsContent() {
 											>
 												<PenBox size={16} />
 											</Button>
-											<Button variant='destructive'>
+											<Button
+												variant='destructive'
+												onClick={() => deleteTariff(item.id)}
+											>
 												<Delete size={16} />
 											</Button>
 										</div>

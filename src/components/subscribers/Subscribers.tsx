@@ -67,17 +67,17 @@ export function SubscribersContent() {
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead className='w-[100px]'>ID</TableHead>
+						<TableHead className='w-[100px]'>№</TableHead>
 						<TableHead>FullName</TableHead>
 						<TableHead>Balance</TableHead>
-						<TableHead>PhoneNumber</TableHead>
+						<TableHead>Phone Number</TableHead>
 						<TableHead className='text-right'>Actions</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{items?.map(item => (
+					{items?.map((item, index) => (
 						<TableRow key={item.id}>
-							<TableCell className='font-medium'>{item.id}</TableCell>
+							<TableCell className='font-medium'>{index + 1}</TableCell>
 							<TableCell>{`${item.firstName} - ${item.lastName}`}</TableCell>
 							<TableCell>{item.balance}</TableCell>
 							<TableCell>{item.phoneNumber}</TableCell>

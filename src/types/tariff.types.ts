@@ -1,7 +1,7 @@
 import type { ISubscriberResponse } from './subscriber.types'
 
 export interface ITariffResponse {
-	id: string
+	id: number
 	name: string
 	price?: number
 	subscribers?: ISubscriberResponse[]

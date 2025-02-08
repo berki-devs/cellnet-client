@@ -4,12 +4,12 @@ import toast from 'react-hot-toast'
 
 import { tariffService } from '@/services/tariff.service'
 
-export function useDeleteTariff(id: number) {
+export function useDeleteTariff() {
 	const queryClient = useQueryClient()
 
 	const { mutate: deleteTariff } = useMutation({
 		mutationKey: ['delete tariff'],
-		mutationFn: () => tariffService.deleteTariff(id),
+		mutationFn: (id: number) => tariffService.deleteTariff(id),
 		onSuccess() {
 			queryClient.invalidateQueries({
 				queryKey: ['tariffs']

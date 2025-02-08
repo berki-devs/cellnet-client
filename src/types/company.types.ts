@@ -7,7 +7,7 @@ export const TaskPriority = {
 } as const
 
 export interface ICompanyResponse {
-	id: string
+	id: number
 	companyName: string
 	tariffs?: ITariffResponse[]
 }

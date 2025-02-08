@@ -1,5 +1,5 @@
 export interface ISubscriberResponse {
-	id: string
+	id: number
 	firstName: string
 	lastName: string
 	phoneNumber: string

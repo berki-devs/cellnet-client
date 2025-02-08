@@ -49,16 +49,16 @@ export function CompaniesContent() {
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead className='w-[100px]'>ID</TableHead>
+						<TableHead className='w-[100px]'>№</TableHead>
 						<TableHead>Name</TableHead>
-						<TableHead>Amount</TableHead>
+						<TableHead>Tariffs</TableHead>
 						<TableHead className='text-right'>Actions</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{items?.map(item => (
+					{items?.map((item, index) => (
 						<TableRow key={item.id}>
-							<TableCell className='font-medium'>{item.id}</TableCell>
+							<TableCell className='font-medium'>{index + 1}</TableCell>
 							<TableCell>{item.companyName}</TableCell>
 							<TableCell>{item.tariffs?.length}</TableCell>
 							<TableCell className='text-right'>

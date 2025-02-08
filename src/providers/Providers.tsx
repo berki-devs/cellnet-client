@@ -13,7 +13,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 					<div className='p-4 w-full'>{children}</div>
 				</main>
 			</LazyMotion>
-			<Toaster />
+			<Toaster position='top-center' />
 		</QueryClientProvider>
 	)
 }
