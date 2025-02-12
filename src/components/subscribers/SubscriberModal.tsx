@@ -1,20 +1,20 @@
 import { FormDialog } from '../ui/dialog/CreateDialog'
 
-import { useCreateTariff } from './hooks/useCreateTariff'
-import { TariffForm } from './TariffForm'
+import { useCreateSubscriber } from './hooks/useCreateSubscriber'
+import { SubscriberForm } from './SubscriberForm'
 
 interface Props {
-	companyId: number
-	title: 'Create Tariff' | 'Update Tariff'
+	tariffId: number
+	title: 'Create Subscriber' | 'Update Subscriber'
 }
 
-export function TariffModal({ companyId, title }: Props) {
+export function SubscriberModal({ tariffId, title }: Props) {
 	const { handleSubmit, register, isPending, onSubmit } =
-		useCreateTariff(companyId)
+		useCreateSubscriber(tariffId)
 
 	return (
 		<FormDialog title={title}>
-			<TariffForm
+			<SubscriberForm
 				register={register}
 				isPending={isPending}
 				onSubmit={handleSubmit(onSubmit)}

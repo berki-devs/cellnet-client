@@ -11,17 +11,15 @@ import {
 import { Button } from '../button/Button'
 
 interface Props {
-	isOpen: boolean
-	setIsOpen: () => void
 	title: string
 	children: ReactNode
 }
 
-export function FormDialog({ isOpen, setIsOpen, title, children }: Props) {
+export function FormDialog({ title, children }: Props) {
 	return (
-		<Dialog open={isOpen}>
+		<Dialog>
 			<DialogTrigger asChild>
-				<Button size='lg' className='text-md' onClick={setIsOpen}>
+				<Button size='lg' className='text-md'>
 					Create
 				</Button>
 			</DialogTrigger>

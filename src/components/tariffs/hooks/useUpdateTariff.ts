@@ -10,7 +10,7 @@ export function useUpdateTariff(companyId: number, id: number) {
 	const { register, handleSubmit, reset } = useForm<TypeTariffFormState>()
 	const queryClient = useQueryClient()
 
-	const { mutate: updateTariff, isPending: isPending } = useMutation({
+	const { mutate: updateTariff, isPending } = useMutation({
 		mutationKey: ['update tariff'],
 		mutationFn: (data: ITariffResponse) =>
 			tariffService.updateTariff(companyId, id, data),

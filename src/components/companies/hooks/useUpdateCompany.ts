@@ -1,18 +1,24 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
+import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
 import { companyService } from '@/services/company.service'
-import type { TypeCompanyFormState } from '@/types/company.types'
+import type {
+	ICompanyResponse,
+	TypeCompanyFormState
+} from '@/types/company.types'
 
 export function useUpdateCompany(key: string) {
+	const { handleSubmit, register, reset } = useForm<TypeCompanyFormState>()
 	const queryClient = useQueryClient()
 
-	const { mutate: updateCompany } = useMutation({
+	const { mutate: updateCompany, isPending: isPending } = useMutation({
 		mutationKey: ['update company', key],
-		mutationFn: ({ id, data }: { id: number; data: TypeCompanyFormState }) =>
+		mutationFn: ({ id, data }: { id: number; data: ICompanyResponse }) =>
 			companyService.updateCompany(id, data),
 		onSuccess() {
+			reset()
 			queryClient.invalidateQueries({
 				queryKey: ['companies']
 			})
@@ -25,5 +31,10 @@ export function useUpdateCompany(key: string) {
 		}
 	})
 
-	return { updateCompany }
+	return {
+		isPending,
+		updateCompany,
+		handleSubmit,
+		register
+	}
 }

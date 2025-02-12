@@ -4,12 +4,12 @@ import toast from 'react-hot-toast'
 
 import { subscriberService } from '@/services/subscriber.service'
 
-export function useDeleteSubscriber(id: number, tariffId: number) {
+export function useDeleteSubscriber(tariffId: number) {
 	const queryClient = useQueryClient()
 
 	const { mutate: deleteSubscriber } = useMutation({
 		mutationKey: ['delete subscriber'],
-		mutationFn: () => subscriberService.deleteSubscriber(id),
+		mutationFn: (id: number) => subscriberService.deleteSubscriber(id),
 		onSuccess() {
 			queryClient.invalidateQueries({
 				queryKey: ['subscribers', tariffId]

@@ -35,6 +35,11 @@ export function TariffsContent() {
 	const { items } = useTariffs(Number(companyId))
 
 	const { deleteTariff } = useDeleteTariff()
+
+	const handleDeleteTariff = (id: number) => {
+		deleteTariff(id)
+	}
+
 	return (
 		<>
 			<Breadcrumb>
@@ -95,7 +100,7 @@ export function TariffsContent() {
 											</Button>
 											<Button
 												variant='destructive'
-												onClick={() => deleteTariff(item.id)}
+												onClick={() => handleDeleteTariff(item.id)}
 											>
 												<Delete size={16} />
 											</Button>

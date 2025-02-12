@@ -23,12 +23,17 @@ import {
 
 import { pageConfig } from '@/config/page.config'
 
-import { FormDialog } from '../ui/dialog/CreateDialog'
-
+import { CompanyModal } from './CompanyModal'
 import { useCompanies } from './hooks/useCompanies'
+import { useDeleteCompany } from './hooks/useDeleteCompany'
 
 export function CompaniesContent() {
 	const { items } = useCompanies()
+	const { deleteCompany } = useDeleteCompany()
+
+	const handleDeleteCompany = (id: number) => {
+		deleteCompany(id)
+	}
 
 	return (
 		<>
@@ -39,11 +44,7 @@ export function CompaniesContent() {
 			</Breadcrumb>
 
 			<div className='flex justify-end'>
-				<FormDialog title='Create Company'>
-					<Button size='lg' className='text-md'>
-						Create
-					</Button>
-				</FormDialog>
+				<CompanyModal title='Create Company' />
 			</div>
 
 			<Table>
@@ -82,7 +83,10 @@ export function CompaniesContent() {
 											>
 												<PenBox size={16} />
 											</Button>
-											<Button variant='destructive'>
+											<Button
+												variant='destructive'
+												onClick={() => handleDeleteCompany(item.id)}
+											>
 												<Delete size={16} />
 											</Button>
 										</div>

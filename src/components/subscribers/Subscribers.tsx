@@ -26,13 +26,19 @@ import {
 
 import { pageConfig } from '@/config/page.config'
 
-import { FormDialog } from '../ui/dialog/CreateDialog'
-
+import { useDeleteSubscriber } from './hooks/useDeleteSubscriber'
 import { useSubscribers } from './hooks/useSubscribers'
+import { SubscriberModal } from './SubscriberModal'
 
 export function SubscribersContent() {
 	const { companyId, tariffId } = useParams()
 	const { items } = useSubscribers(Number(tariffId))
+
+	const { deleteSubscriber } = useDeleteSubscriber(Number(tariffId))
+
+	const handleDeleteSubscriber = (id: number) => {
+		deleteSubscriber(id)
+	}
 
 	return (
 		<>
@@ -57,11 +63,10 @@ export function SubscribersContent() {
 			</Breadcrumb>
 
 			<div className='flex justify-end'>
-				<FormDialog title='Create Tariff'>
-					<Button size='lg' className='text-md'>
-						Create
-					</Button>
-				</FormDialog>
+				<SubscriberModal
+					tariffId={Number(tariffId)}
+					title='Create Subscriber'
+				/>
 			</div>
 
 			<Table>
@@ -96,7 +101,10 @@ export function SubscribersContent() {
 											>
 												<PenBox size={16} />
 											</Button>
-											<Button variant='destructive'>
+											<Button
+												variant='destructive'
+												onClick={() => handleDeleteSubscriber(item.id)}
+											>
 												<Delete size={16} />
 											</Button>
 										</div>

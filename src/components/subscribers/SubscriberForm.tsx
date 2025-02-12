@@ -4,30 +4,44 @@ import { Button } from '../ui/button/Button'
 import { DialogClose } from '../ui/dialog/dialog'
 import { Input } from '../ui/input/Input'
 
-import type { TypeTariffFormState } from '@/types/tariff.types'
+import type { TypeSubscriberFormState } from '@/types/subscriber.types'
 
 interface Props {
 	isPending: boolean
 	onSubmit: () => void
-	register: UseFormRegister<TypeTariffFormState>
+	register: UseFormRegister<TypeSubscriberFormState>
 	title: string
 }
 
-export function TariffForm({ onSubmit, register, isPending, title }: Props) {
+export function SubscriberForm({
+	onSubmit,
+	register,
+	isPending,
+	title
+}: Props) {
 	return (
 		<>
 			<form onSubmit={onSubmit}>
 				<div className='grid gap-4'>
 					<Input
 						type='text'
-						placeholder='Type tariff name'
-						{...register('name', { required: true })}
+						placeholder='First name'
+						{...register('firstName', { required: true })}
+					/>
+					<Input
+						type='text'
+						placeholder='Last name'
+						{...register('lastName', { required: true })}
+					/>
+					<Input
+						type='tel'
+						placeholder='Phone number'
+						{...register('phoneNumber', { required: true })}
 					/>
 					<Input
 						type='number'
-						min='0'
-						placeholder='Type price'
-						{...register('price', { required: true })}
+						placeholder='Balance'
+						{...register('balance', { required: false })}
 					/>
 				</div>
 				<div className='flex items-center justify-between mt-5 w-full'>
